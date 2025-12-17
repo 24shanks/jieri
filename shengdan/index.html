@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>圣诞节惊喜</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: radial-gradient(circle at top, #123 0%, #020b18 60%, #000 100%);
+      overflow: hidden;
+      font-family: "Segoe UI", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .star { position: absolute; width: 2px; height: 2px; background: #fff; opacity: 0.8; border-radius: 50%; box-shadow: 0 0 6px rgba(255,255,255,0.8); animation: twinkle 3s infinite ease-in-out; }
+    @keyframes twinkle { 0%,100% { opacity:0.3; } 50% { opacity:1; } }
+    .snowflake { position: absolute; top:-10px; color:#fff; font-size:12px; opacity:0.8; animation:snow linear infinite; pointer-events:none; }
+    @keyframes snow { 0% { transform: translateY(0); } 100% { transform: translateY(110vh); } }
+
+    .stage { position: relative; width: 100vw; max-width: 600px; height: 100vh; max-height: 600px; text-align:center; }
+
+    .gift { position: absolute; left: 50%; bottom: 90px; transform: translateX(-50%); cursor: pointer; }
+    .gift img { width: 180px; height: auto; display: block; }
+    .gift span { display: block; margin-top: 8px; font-size:16px; letter-spacing:1px; opacity:0.9; }
+
+    .treeContainer { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none; flex-direction: column; align-items: center; opacity: 0; }
+    .treeContainer img { max-width: 300px; height: auto; margin-top: 10px; }
+
+    /* 图片缩小一半并位于圣诞树上方 */
+/* 图片缩小一半并位于圣诞树上方 */
+.images {
+    position: absolute;
+    /* 1. 使用 left: 50% 和 transform: translateX(-50%) 实现水平居中 */
+    left: 42%;
+    transform: translateX(-50%);
+    /* 2. 移除 display: flex，因为我们要使用绝对定位来叠加图片 */
+    /* display: flex; */
+    gap: 24px; /* 这个属性可以保留，但对绝对定位的子元素没有影响 */
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    top: calc(50% - 200px);
+}
+
+.images img {
+    width: 80px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+    /* 3. 为所有图片设置绝对定位 */
+    position: absolute;
+    /* 4. 重置图片的 top/left 避免初始定位偏移，让 .images 的定位生效 */
+    top: 0;
+}
+
+/* 5. 定义两组图片的位置 */
+
+/* 左侧图片组 (imgA1 和 imgB1) */
+#imgA1, #imgB1 {
+    /* 通过调整 left 值来定位第一组图片的位置 */
+    /* 假设 .images 容器是两张图片的总宽度 + gap 的宽度，我们需要将左侧图片向左移动 */
+    left: -47px; /* 70px (图片宽度) / 2 + 24px (gap) / 2 = 35 + 12 = 47px */
+    /* 计算方式可能因实际布局而异，这里是一个示例值，确保它在中心左侧 */
+}
+
+/* 右侧图片组 (imgA2 和 imgB2) */
+#imgA2, #imgB2 {
+    /* 通过调整 left 值来定位第二组图片的位置 */
+    /* 确保右侧图片在中心右侧，与第一组图片间隔 24px */
+    left: 47px;
+}
+
+/* 保持 .show 样式 */
+.images.show {
+    opacity: 1;
+}
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div id="background"></div>
+
+    <div class="treeContainer" id="treeContainer">
+      <img id="treeGif" src="./shengdanshu.gif" alt="圣诞树" />
+      <img id="treeImage" src="./shengdan.png" alt="圣诞装饰" />
+    </div>
+
+    <div class="gift" id="gift">
+      <img id="giftGif" src="./hezi.png" data-src="./hezi.gif" alt="礼物" />
+      <span>点击打开</span>
+    </div>
+
+    <div class="images" id="images">
+      <img id="imgA1" src="./lvg8hxlvg8hxlvg9.png" alt="图片1" />
+      <img id="imgA2" src="./13hfpih3hfpih3hfp.png" alt="图片2" />
+	  <img id="imgB1" src="./x15u5mx15u5mx15x.png" alt="图片1" />
+      <img id="imgB2" src="./wqdx0rwqdx0rwqdx.png" alt="图片2" />
+    </div>
+
+  </div>
+
+  <script>
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      document.body.appendChild(star);
+    }
+
+    for (let i = 0; i < 40; i++) {
+      const snow = document.createElement('div');
+      snow.className = 'snowflake';
+      snow.innerText = '❄';
+      snow.style.left = Math.random() * 100 + 'vw';
+      snow.style.animationDuration = (5 + Math.random() * 5) + 's';
+      snow.style.animationDelay = Math.random() * 5 + 's';
+      snow.style.fontSize = (10 + Math.random() * 10) + 'px';
+      document.body.appendChild(snow);
+    }
+
+    const gift = document.getElementById('gift');
+    const gif = document.getElementById('giftGif');
+    const treeContainer = document.getElementById('treeContainer');
+    const images = document.getElementById('images');
+    const imageSets = [
+      ['./lvg8hxlvg8hxlvg9.png', './13hfpih3hfpih3hfp.png'],
+      ['./x15u5mx15u5mx15u.png', './wqdx0rwqdx0rwqdx.png']
+    ];
+	document.getElementById('imgA1').style.opacity = '1';
+	document.getElementById('imgA2').style.opacity = '1';
+	document.getElementById('imgB1').style.opacity = '0';
+	document.getElementById('imgB2').style.opacity = '0';
+
+    let currentSet = 0;
+    gift.addEventListener('click', () => {
+      const src = gif.dataset.src;
+      const tempImg = new Image();
+      tempImg.src = src;
+      tempImg.onload = () => { gif.src = src; };
+
+      setTimeout(() => {
+        gift.style.display = 'none';
+
+        treeContainer.style.display = 'flex';
+        treeContainer.style.transition = 'transform 1.2s ease, opacity 1.2s ease';
+        treeContainer.style.transform = 'translate(-50%, 50px)';
+        treeContainer.style.opacity = '0';
+
+        requestAnimationFrame(() => {
+          treeContainer.style.transform = 'translate(-50%, -50%)';
+          treeContainer.style.opacity = '1';
+        });
+
+        setTimeout(() => {
+          images.classList.add('show');
+
+          //const imgs = images.querySelectorAll('img');
+          setInterval(() => {
+			  if( currentSet === 0){
+				document.getElementById('imgA1').style.opacity = '0';
+				document.getElementById('imgA2').style.opacity = '0';
+				document.getElementById('imgB1').style.opacity = '1';
+				document.getElementById('imgB2').style.opacity = '1';
+				setTimeout(() => {
+					currentSet = 1; 
+				}, 1000);
+
+			  }else{
+
+				document.getElementById('imgA1').style.opacity = '1';
+				document.getElementById('imgA2').style.opacity = '1';
+				document.getElementById('imgB1').style.opacity = '0';
+				document.getElementById('imgB2').style.opacity = '0';
+				setTimeout(() => {
+					currentSet = 0; 
+				}, 1000);
+			  }
+
+          }, 2000);
+        }, 1000);
+      }, 2000);
+    });
+
+    gift.addEventListener('touchstart', () => gift.click());
+  </script>
+</body>
+</html>
