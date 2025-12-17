@@ -1,5 +1,5 @@
 # -
-由chat-gpt生成的纯前端节日页面，陆续更新中
+由AI(chat-gpt/gemioni)生成的纯前端节日页面，陆续更新中
 
 圣诞节
 预览地址 https://jieri.9977521.xyz/shengdan/
