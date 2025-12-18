@@ -240,13 +240,17 @@
               document.getElementById('imgA2').style.opacity = '0';
               document.getElementById('imgB1').style.opacity = '1';
               document.getElementById('imgB2').style.opacity = '1';
-              currentSet = 1;
+              setTimeout(() => {
+					currentSet = 1; 
+				}, 1000);
             } else {
               document.getElementById('imgA1').style.opacity = '1';
               document.getElementById('imgA2').style.opacity = '1';
               document.getElementById('imgB1').style.opacity = '0';
               document.getElementById('imgB2').style.opacity = '0';
-              currentSet = 0;
+              	setTimeout(() => {
+					currentSet = 0; 
+				}, 1000);
             }
           }, 2000);
         }, 1000);
